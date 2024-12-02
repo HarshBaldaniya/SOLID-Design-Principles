@@ -42,7 +42,7 @@ This project demonstrates a **User Registration System** designed following the 
 ### 2. Open/Closed Principle (OCP)
 - **Definition**: A class/module should be open for extension but closed for modification.
 - **Application**:
-  - The `AnalyticsAdapter` interface allows new analytics adapters (e.g., Mixpanel) to be added without modifying existing code.
+  - The `AnalyticsAdapter` interface allows new analytics adapters (e.g., Matomo) to be added without modifying existing code.
   - The `NotificationService` interface enables adding new notification methods (e.g., WhatsApp) without changing the core logic.
 
 ---
@@ -127,6 +127,7 @@ src/
 │   ├── LoggerService.java
 │   ├── UserValidator.java
 │   ├── UserRegistrationService.java
+|   ├── NotificationService.java
 ├── repository/
 │   └── UserRepository.java
 ├── adapters/
