@@ -141,25 +141,6 @@ src/
 
 ---
 
-## How to Run
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository_url>
-   ```
-
-2. **Compile the project**:
-   ```bash
-   javac -d out src/**/*.java
-   ```
-
-3. **Run the application**:
-   ```bash
-   java -cp out Main
-   ```
-
----
-
 ## Example Output
 
 **For a user with:**
@@ -202,5 +183,4 @@ This system solves the problem by implementing:
 
 ---
 
-## Contact
-For any questions or feedback, please reach out to `harshkumar.baldaniya@gmail.com`.
+# Thank You
