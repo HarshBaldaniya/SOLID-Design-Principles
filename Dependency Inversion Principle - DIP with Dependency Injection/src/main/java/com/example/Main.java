@@ -1,26 +1,38 @@
 package com.example;
 
 import com.example.config.AppConfig;
-import com.example.store.PizzaStore;
-import com.example.deliveryMethods.Delivery;
+import com.example.feast.VillageHead;
+import com.example.cookingMethods.Cooking;
+import com.example.dishes.Dish;
+import com.example.dishes.DishFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
+        // Initialize Spring application context
         ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        // Retrieve the PizzaStore bean with a specific Delivery method injected via @Qualifier in PizzaStore.
-        PizzaStore bikeDelivery = context.getBean(PizzaStore.class);
-        bikeDelivery.deliverPizzaToCustomer("123 Main St"); 
+        // Get the VillageHead bean with TandoorCooking injected
+        VillageHead villageHead = context.getBean(VillageHead.class);
 
-        // You can manually inject a different Delivery method
-        PizzaStore carDeliveryStore = new PizzaStore(context.getBean("carDelivery", Delivery.class));
-        carDeliveryStore.deliverPizzaToCustomer("134 Laxmi Park Soc.");  
+        // Create and prepare a dish using TandoorCooking
+        Dish butterNaan = DishFactory.createDish("Butter Naan");
+        villageHead.prepareDish(butterNaan);
 
-        PizzaStore robotDeliveryStore = new PizzaStore(context.getBean("robotDelivery", Delivery.class));
-        robotDeliveryStore.deliverPizzaToCustomer("Yash PG");  
+        // Dynamically switch to ChulhaCooking for another dish
+        Cooking chulhaCooking = context.getBean("chulhaCooking", Cooking.class);
+        villageHead.setCookingMethod(chulhaCooking);
+        Dish khichdi = DishFactory.createDish("Khichdi");
+        villageHead.prepareDish(khichdi);
 
+        // Dynamically switch to KadhaiCooking for yet another dish
+        Cooking kadhaiCooking = context.getBean("kadhaiCooking", Cooking.class);
+        villageHead.setCookingMethod(kadhaiCooking);
+        Dish paneerMasala = DishFactory.createDish("Paneer Butter Masala");
+        villageHead.prepareDish(paneerMasala);
+
+        // Close the application context
         context.close();
     }
 }
